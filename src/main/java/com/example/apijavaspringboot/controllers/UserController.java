@@ -1,6 +1,5 @@
 package com.example.apijavaspringboot.controllers;
 
-
 import com.example.apijavaspringboot.entities.User;
 import com.example.apijavaspringboot.entities.dtos.CreateUserDto;
 import com.example.apijavaspringboot.entities.dtos.UpdateUserDto;
@@ -8,7 +7,6 @@ import com.example.apijavaspringboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -48,7 +46,8 @@ public class UserController {
 
     @PutMapping("/{userid}")
     public ResponseEntity<User> updateUser(@PathVariable("userid") UUID userid, @RequestBody UpdateUserDto updateUserDto) {
-
+        userService.updateUser(userid, updateUserDto);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{userid}")
