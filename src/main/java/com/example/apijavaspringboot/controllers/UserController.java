@@ -1,8 +1,7 @@
 package com.example.apijavaspringboot.controllers;
 
 import com.example.apijavaspringboot.entities.User;
-import com.example.apijavaspringboot.entities.dtos.CreateUserDto;
-import com.example.apijavaspringboot.entities.dtos.UpdateUserDto;
+import com.example.apijavaspringboot.entities.dtos.*;
 import com.example.apijavaspringboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +54,21 @@ public class UserController {
         userService.deleteUser(userid);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{userid}/accounts")
+    public ResponseEntity<Void> createAccount(@PathVariable("userid") UUID userid, @RequestBody CreateAccountDto createAccountDto) {
+
+        userService.createAccount(userid, createAccountDto);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userid}/accounts")
+    public ResponseEntity<List<AccountResponseDto>> getAccounts(@PathVariable("userid") UUID userid) {
+
+        var accounts = userService.listAccounts(userid);
+
+        return ResponseEntity.ok(accounts);
     }
 }

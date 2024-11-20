@@ -16,9 +16,15 @@ public class Stock {
     private String description;
 
     @OneToMany(mappedBy = "stock")
-    private List<AccountStock> accountStockList;
+    private List<AccountStock> stockList;
 
     public Stock() {
+    }
+
+    public Stock(String id, String description, List<AccountStock> stockList) {
+        this.id = id;
+        this.description = description;
+        this.stockList = stockList;
     }
 
     public Stock(String id, String description) {

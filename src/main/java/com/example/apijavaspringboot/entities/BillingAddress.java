@@ -19,11 +19,18 @@ public class BillingAddress {
     @Column(name = "number")
     private Integer number;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
 
     public BillingAddress() {
+    }
+
+    public BillingAddress(UUID id, String street, Integer number, Account account) {
+        this.id = id;
+        this.street = street;
+        this.number = number;
+        this.account = account;
     }
 
     public BillingAddress(UUID id, String street, Integer number) {
